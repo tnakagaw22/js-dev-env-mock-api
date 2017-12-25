@@ -13,10 +13,10 @@ app.get('/', function (request, response) {
 });
 
 app.get('/properties', function (req, res) {
-  // let propertyFilePath = path.join(__dirname, 'data/property.json');
+  let propertyFilePath = path.join(__dirname, 'data/property.json');
   // let readable = fs.createReadStream(propertyFilePath);
   // readable.pipe(res);
-  res.send('Hello World!')
+  res.send('Hello World!' + propertyFilePath);
 
 });
 
