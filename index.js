@@ -1,5 +1,7 @@
-var express =  require('express');
-var cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
 
 const app = express();
 app.use(cors());
@@ -10,13 +12,10 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 });
 
-app.get('/users', function(req, res) {
-  // Hard coding for simplicity. Pretend this hits a real database
-  res.json([
-    {"id": 1,"firstName":"Bob","lastName":"Smith","email":"bob@gmail.com"},
-    {"id": 2,"firstName":"Tammy","lastName":"Norton","email":"tnorton@yahoo.com"},
-    {"id": 3,"firstName":"Tina111","lastName":"Lee","email":"lee.tina@hotmail.com"}
-  ]);
+app.get('/properties', function(req, res) {
+  let propertyFilePath = path.join(__dirname, 'data/property.json');
+  let readable = fs.createReadStream(propertyFilePath);
+  readable.pipe(res);
 });
 
 app.listen(app.get('port'), function() {
