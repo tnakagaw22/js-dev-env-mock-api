@@ -1,6 +1,6 @@
 var express = require('express');
 var cors = require('cors');
-var mockProperties = require('./data/property.json');
+var mockProperties = require('./api/data.json');
 
 const app = express();
 app.use(cors());
@@ -11,8 +11,9 @@ app.get('/', function (request, response) {
   response.send('Hello World!')
 });
 
-app.get('/properties', function (req, res) {
-  res.send(mockProperties);
+app.get('/listings', function (req, res) {
+  var data = JSON.parse(mockProperties);
+  res.send(data.listings);
 });
 
 app.listen(app.get('port'), function () {
